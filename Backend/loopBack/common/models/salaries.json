@@ -1,6 +1,6 @@
 
 {
-    "name": "clients",
+    "name": "salaries",
     "base": "PersistedModel",
     "idInjection": true,
     "options": {

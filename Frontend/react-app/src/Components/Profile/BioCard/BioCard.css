@@ -1,0 +1,22 @@
+/* .bio-card-container {
+    background: #fbcdc1;
+} */
+
+.main-color{
+    background: #fbcdc1;
+}
+
+.about {
+    background: #fff;
+}
+
+.view-port-btn{
+    padding: 0px 5px;
+    font-size: 0.65rem;
+    border-radius: 0.3rem;
+}
+
+.row{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}

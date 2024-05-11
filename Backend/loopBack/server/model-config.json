@@ -31,6 +31,9 @@
   "messages": {
     "dataSource": "db"
   },
+  "skillset": {
+    "dataSource": "db"
+  },
   "AccessToken": {
     "dataSource": "db",
     "public": false

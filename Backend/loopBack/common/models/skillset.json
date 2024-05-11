@@ -1,0 +1,24 @@
+
+{
+    "name": "skillset",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "properties": {
+      "skill": {
+        "type": "string",
+        "required": true
+      },
+      "domain": {
+        "type": ["string"]
+      }
+
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+  }
+  

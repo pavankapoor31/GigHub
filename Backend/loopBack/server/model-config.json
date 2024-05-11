@@ -34,6 +34,9 @@
   "skillset": {
     "dataSource": "db"
   },
+  "salaries": {
+    "dataSource": "db"
+  },
   "AccessToken": {
     "dataSource": "db",
     "public": false

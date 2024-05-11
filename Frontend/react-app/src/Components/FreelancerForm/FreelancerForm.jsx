@@ -1,29 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextField, Checkbox, Button, FormControl, FormControlLabel, FormGroup, Grid, InputLabel, MenuItem, Select,FormLabel,
-  FormHelperText, } from '@mui/material';
+FormHelperText, } from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
+import axios from 'axios';
+import { BASE_URL } from '../../global_config';
 
-const FreelancerForm = () => {
+const FreelancerForm = ({onClose}) => {
   const [formData, setFormData] = useState({
     location: '',
     bio: '',
+    about:'',
     profilePicture: null,
     budget: '',
     experience: '',
     skills: [],
+    portfolio:'',
+    linkedin:''
   });
   const [base64Image, setBase64Image] = useState('');
+  const [skillsList, setSkillsList] = useState(['HTML', 'CSS', 'JavaScript', 'React', 'Node.js', 'Python', 'Java']);
   const [formErrors, setFormErrors] = useState({
     location: false,
     bio: false,
+    about: false,
     profilePicture: false,
     budget: false,
     experience: false,
     skills: false,
+    portfolio:false,
+    linkedIn:false
   });
-  const skillsList = ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js', 'Python', 'Java']; // Sample skills list
 
+  useEffect(
+    ()=>{
+      axios.get(
+        `${BASE_URL}/api/skillsets?filter={"fields":"skill"}`
+      ).then(
+        (res)=>{
+         let tempSkills =  res.data.map((item)=>item.skill);
+         tempSkills = Array.from(new Set(tempSkills))
+         setSkillsList(tempSkills)
+        }
+      )
+    },[]
+  )
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log(name,value,'freelancerData')
     setFormData({
       ...formData,
       [name]: value,
@@ -34,23 +57,6 @@ const FreelancerForm = () => {
     });
   };
 
-  const handleCheckboxChange = (e) => {
-    const { value, checked } = e.target;
-    let updatedSkills = [...formData.skills];
-    if (checked) {
-      updatedSkills.push(value);
-    } else {
-      updatedSkills = updatedSkills.filter((skill) => skill !== value);
-    }
-    setFormData({
-      ...formData,
-      skills: updatedSkills,
-    });
-    setFormErrors({
-      ...formErrors,
-      skills: updatedSkills.length === 0,
-    });
-  };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -80,10 +86,10 @@ const FreelancerForm = () => {
 
   const handleSubmit = () => {
     // Basic validation
-    const { location, bio, profilePicture, budget, experience, skills } = formData;
-    if (location.trim() === '' || bio.trim() === '' || !profilePicture || budget.trim() === '' || experience.trim() === '' || skills.length === 0) {
+    const { location, bio, profilePicture, budget, experience, skills,about, linkedin, portfolio} = formData;
+    if (location.trim() === '' || bio.trim() === '' || about.trim() === '' || budget.trim() === '' || experience.trim() === '' || skills.length === 0) {
       alert('Please fill in all fields.');
-      return;
+      return; 
     }
 
     // Your function to handle the form data
@@ -93,9 +99,14 @@ const FreelancerForm = () => {
       profilePicture: base64Image,
       budget,
       experience,
-      skills: skills.join(', '),
+      about,
+      skills: skills,
+      portfolio:{
+        "portfolio":portfolio,
+        "linkedin":linkedin
+      }
     };
-    console.log(freelancerData); // You can replace this with your actual function to submit the data
+    console.log(freelancerData,'freelancerData'); // You can replace this with your actual function to submit the data
   };
 
   return (
@@ -118,12 +129,26 @@ const FreelancerForm = () => {
           label="BIO"
           variant="outlined"
           multiline
-          rows={4}
+          rows={1}
           fullWidth
           value={formData.bio}
           onChange={handleInputChange}
           error={formErrors.bio}
           helperText={formErrors.bio ? 'BIO is required' : ''}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          name="about"
+          label="ABOUT ME"
+          variant="outlined"
+          multiline
+          rows={3}
+          fullWidth
+          value={formData.about}
+          onChange={handleInputChange}
+          error={formErrors.about}
+          helperText={formErrors.about ? 'BIO is required' : ''}
         />
       </Grid>
       <Grid item xs={12}>
@@ -134,46 +159,86 @@ const FreelancerForm = () => {
         />
         {formErrors.profilePicture && <div style={{ color: 'red' }}>Profile picture size should be less than 1MB</div>}
       </Grid>
-      <Grid item xs={12}>
+      <Grid container spacing={2} style={{marginLeft:'0.15rem', marginTop:'0.2rem'}}>
+      <Grid item xs={8}>
         <TextField
           name="budget"
           label="Budget/hr"
           variant="outlined"
           fullWidth
+          type="number" 
+          inputProps={{ min: 1 }} 
           value={formData.budget}
           onChange={handleInputChange}
           error={formErrors.budget}
           helperText={formErrors.budget ? 'Budget/hr is required' : ''}
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={4}>
         <TextField
           name="experience"
           label="Experience"
           variant="outlined"
           fullWidth
+          type="number" 
+          inputProps={{ min: 0 }} 
           value={formData.experience}
           onChange={handleInputChange}
           error={formErrors.experience}
           helperText={formErrors.experience ? 'Experience is required' : ''}
         />
       </Grid>
+    </Grid>
+
+
       <Grid item xs={12}>
-        <FormControl component="fieldset" error={formErrors.skills}>
-          <FormLabel component="legend">Skills</FormLabel>
-          <FormGroup>
-            {skillsList.map((skill, index) => (
-              <FormControlLabel
-                key={index}
-                control={<Checkbox checked={formData.skills.includes(skill)} onChange={handleCheckboxChange} value={skill} />}
-                label={skill}
-              />
-            ))}
-          </FormGroup>
-          {formErrors.skills && <FormHelperText>Select at least one skill</FormHelperText>}
-        </FormControl>
+      <Autocomplete
+        multiple
+        id="skills-autocomplete"
+        options={skillsList}
+        value={formData.skills}
+        onChange={(event, newValue) => {
+          const selectedSkills = newValue.map((option) => option.trim()); // Trim any whitespace
+          setFormData({ ...formData, skills: selectedSkills });
+        }}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label="Skills"
+            error={formErrors.skills}
+            helperText={formErrors.skills && 'Select at least one skill'}
+          />
+        )}
+      />
       </Grid>
-      <Grid item xs={12}>
+      
+      <Grid item xs={12}> 
+      <TextField
+        name="linkedin"
+        label="LinkedIn Profile"
+        variant="outlined"
+        fullWidth
+        value={formData.linkedin}
+        onChange={handleInputChange}
+        placeholder="https://www.linkedin.com/in/yourprofile"
+        margin="normal"
+      />
+      <TextField
+        name="portfolio"
+        label="Portfolio URL"
+        variant="outlined"
+        fullWidth
+        value={formData.portfolio}
+        onChange={handleInputChange}
+        placeholder="https://www.yourportfolio.com"
+        margin="normal"
+      />
+      </Grid>
+      <Grid item xs={12} className='d-flex gap-2'>
+        <Button variant="contained" className='bg-danger' onClick={onClose}>
+          Cancel
+        </Button>
         <Button variant="contained" color="primary" onClick={handleSubmit}>
           Submit
         </Button>

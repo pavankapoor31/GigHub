@@ -1,0 +1,25 @@
+
+{
+    "name": "salaries",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "properties": {
+      "experience": {
+        "type": "float",
+        "required": true
+      },
+      "pay": {
+        "type": "float",
+	"required": true
+      }
+
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+  }
+  

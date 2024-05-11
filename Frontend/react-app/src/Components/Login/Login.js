@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import {toast} from 'react-toastify'
 import axios from "axios";
 import { BASE_URL } from "../../global_config";
+import Logo from "../Logo/Logo";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,6 +52,10 @@ const Login = () => {
   };
 
   return (
+    <>
+    <div className="position-absolute">
+    <Logo/>
+    </div>
     <div className=" content-wrapper d-flex align-center">
       <div className="Auth-form-container mw-400 h-50 card p-4 ml-4">
         <form className="Auth-form">
@@ -86,6 +91,7 @@ const Login = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

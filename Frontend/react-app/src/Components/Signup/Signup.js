@@ -75,7 +75,7 @@ const Signup = () => {
     <div className=" content-wrapper d-flex align-center">
       <div className="Auth-form-container card p-4 ml-4">
         <form className="Auth-form">
-          <div className="Auth-form-content mt-3">
+          <div className="Auth-form-content mt-2">
             <h3 className="Auth-form-title">Sign Up</h3>
             <div className="form-group mt-3">
               <label>Full name</label>

@@ -1,18 +1,16 @@
 import React from 'react';
+import { Dialog, DialogContent, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import FreelancerForm from './FreelancerForm';
 
-const FreelancerFormWrapper = () => {
-  const handleSubmitForm = (formData) => {
-    // Your logic to handle the form data submission
-    console.log(formData); // For demonstration purposes
-  };
-
+const FreelancerFormModal = ({ open, onClose }) => {
   return (
-    <div style={{ maxWidth: 600, margin: 'auto' }}>
-      <h1>Freelancer Profile</h1>
-      <FreelancerForm onSubmit={handleSubmitForm} />
-    </div>
+    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+      <DialogContent>
+        <FreelancerForm onClose={onClose} />
+      </DialogContent>
+    </Dialog>
   );
 };
 
-export default FreelancerFormWrapper;
+export default FreelancerFormModal;

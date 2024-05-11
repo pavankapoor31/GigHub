@@ -1,0 +1,64 @@
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .search-box {
+    flex: 1;
+    margin: 0 20px;
+  }
+  
+  .icons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .welcome-user {
+    font-weight: bold;
+  }
+  .topbar-search{
+    display: flex; 
+    align-items: center;
+    max-width: 400px;
+    border-radius: 12px;
+  }
+  .border-radius-25{
+    border-radius: 6px;
+  }
+  .border-radius-r-25{
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  .icons {
+    display: flex;
+    align-items: center;
+    font-size: 16px; /* Adjust the font size as needed */
+}
+
+.icons .inbox-icon,
+.icons .home-icon,
+.icons .bookmarks-icon {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px; /* Adjust the margin between icons */
+    font-size: inherit; /* Inherit font size from parent (.icons) */
+}
+
+/* Additional styles for specific icons */
+.inbox-icon svg,
+.home-icon svg,
+.bookmarks-icon svg {
+    font-size: 1.2em; /* Adjust icon size */
+    margin-right: 5px; /* Adjust the margin between icon and text */
+}

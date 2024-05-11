@@ -1,0 +1,26 @@
+.content-wrapper{
+    width: 100vw;
+    height: 100vh;
+    background: url('./../../assets/images/Home_background.webp');
+}
+
+.mw-400{
+    max-width: 400px;
+}
+
+.justify-center{
+    justify-content: center;
+}
+.align-center{
+    align-items: center;
+}
+
+.ml-4{
+    margin-left: 6rem;
+}
+
+.Auth-form-container{
+    background: rgba(250, 250, 250, 0.6) !important;
+    width: 30vw;
+    height: 60vh;
+}

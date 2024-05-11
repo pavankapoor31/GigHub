@@ -25,6 +25,7 @@ const Login = () => {
           (res)=>{
             try{
               localStorage.setItem('profile.id',JSON.stringify(res.data[0].id))
+              localStorage.setItem('profile.username',JSON.stringify(res.data[0].username))
             }
             catch (err){
               console.log(err)

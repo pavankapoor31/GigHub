@@ -71,6 +71,8 @@ const Signup = () => {
           axios.post(`${BASE_URL}/api/clients`,payload).then(
             (res)=>{
               localStorage.setItem('profile.id',JSON.stringify(res.data.id))
+               localStorage.setItem("profile.username", JSON.stringify(res.data.username));
+
             }
           ).catch(
             (err)=>{

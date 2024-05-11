@@ -72,10 +72,10 @@ const Signup = () => {
   };
 
   return (
-    <div className=" content-wrapper d-flex justify-center align-center">
-      <div className="Auth-form-container mw-500 card p-4 col-md-3">
+    <div className=" content-wrapper d-flex align-center">
+      <div className="Auth-form-container card p-4 ml-4">
         <form className="Auth-form">
-          <div className="Auth-form-content">
+          <div className="Auth-form-content mt-3">
             <h3 className="Auth-form-title">Sign Up</h3>
             <div className="form-group mt-3">
               <label>Full name</label>

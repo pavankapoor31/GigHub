@@ -1,5 +1,6 @@
 import React from 'react'
 import BioCard from './BioCard/BioCard'
+import LastChats from '../Last Chats/LastChats'
 
 const bioCardInfo = {
   name: 'Reetik',
@@ -13,8 +14,12 @@ const bioCardInfo = {
 
 export default function LancerProfile() {
   return (
-    <div className='p-2 w-100'>
-      <BioCard info={bioCardInfo} />
+    <div className='w-100 h-100 border border-danger'>
+      <div className='p-2 d-flex w-100 border'>
+        <BioCard info={bioCardInfo} />
+        <LastChats />
+      </div>
     </div>
+    
   )
 }

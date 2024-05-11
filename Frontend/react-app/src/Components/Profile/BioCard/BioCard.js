@@ -1,12 +1,13 @@
 import React from 'react'
 import './BioCard.css'
+import { ReactComponent as LocationIcon } from '../../../assets/images/mapIcon.svg'
 
 export default function BioCard({info}) {
 
 
   return (
     <div className='d-flex flex-column border rounded-top'>
-      <div className='bio-card-container d-flex justify-content-between rounded-top'>
+      <div className='main-color bio-card-container d-flex justify-content-between rounded-top'>
         
         <img src={require('../../../assets/images/profileImage.jpg')}
             alt="Profile image"
@@ -41,19 +42,38 @@ export default function BioCard({info}) {
 
       </div>
 
-      <div className='about d-flex flex-column p-2 align-items-start'>
+      <div className='d-flex flex-column p-2 align-items-start'>
         <span className='text-md font-sans font-semibold'>About me</span>
         <p className='text-xs text-slate-500'>{info.bio}{info.bio}</p>
       </div>
 
-      <div className='about row'>
-        <div className='col-3 pb-2 d-flex flex-column'>
-          <span className='text-md font-semibold'>Location</span>
-          <span className='text-xs text-slate-500'>{info.location}</span>
+      <div className='row align-items-center pb-2'>
+        <div className='col-3 d-flex flex-column'>
+          <span className='text-md font-sans font-semibold'>Location</span>
+          <span className='text-xs d-flex align-items-center text-slate-500'><LocationIcon className='ml-n2'/> {info.location}</span>
         </div>
 
-        <div className='col-7 pb-2'>
-            {/* <button>Btn</button> */}
+        <div className='col-9 d-flex justify-content-end'>
+          <div className='col-3'>
+            <div className='main-color p-2 d-flex flex-column align-items-start rounded-start'>
+              <span className='text-sm font-sans'>Portfolio</span>
+              <a className='text-xs' href='#'>{info.portfolio}</a>
+            </div>
+          </div>
+
+          <div className='col-3'>
+            <div className='main-color p-2 d-flex flex-column align-items-start'>
+              <span className='text-sm font-sans'>Linkedin</span>
+              <a className='text-xs' href='#'>{info.linkedin}</a>
+            </div>
+          </div>
+
+          <div className='col-3'>
+            <div className='main-color p-2 d-flex flex-column align-items-start rounded-end'>
+              <span className='text-sm font-sans'>Email</span>
+              <a className='text-xs' href='#'>{info.email}</a>
+            </div>
+          </div>
         </div>
       </div>
 

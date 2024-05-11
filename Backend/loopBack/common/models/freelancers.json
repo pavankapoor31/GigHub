@@ -44,6 +44,9 @@
       "username":{
         "type": "string",
         "required": true
+      },
+      "experience":{
+        "type": "number"
       }
     },
     "validations": [],

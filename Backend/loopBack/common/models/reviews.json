@@ -1,0 +1,37 @@
+
+{
+    "name": "reviews",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "properties": {
+      "freelancer_id": {
+        "type": "string",
+        "required": true
+      },
+      "client_id": {
+        "type": "string",
+        "required": true
+      },
+      "rating": {
+        "type": "number"
+      },
+      "comment": {
+        "type": "string"
+      },
+      "reviewedOn": {
+        "type": "date"
+      },
+      "reviewer": {
+        "type": "string"
+      }
+
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+  }
+  

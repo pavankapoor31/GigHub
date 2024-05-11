@@ -20,11 +20,12 @@ const Login = () => {
         // Signed in 
         const user = userCredential.user;
         axios.get(
-          `${BASE_URL}/api/users?filter={"where":{"email":"${user.email}"}}`
+          `${BASE_URL}/api/clients?filter={"where":{"email":"${user.email}"}}`
         ).then(
           (res)=>{
             try{
               localStorage.setItem('profile.id',JSON.stringify(res.data[0].id))
+              localStorage.setItem('profile.username',JSON.stringify(res.data[0].username))
             }
             catch (err){
               console.log(err)

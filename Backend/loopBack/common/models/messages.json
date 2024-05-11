@@ -1,0 +1,32 @@
+
+{
+    "name": "messages",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "properties": {
+      "client_id": {
+        "type": "string",
+        "required": true
+      },
+      "freelancer_id": {
+        "type": "string",
+        "required": true
+      },
+      "message": {
+        "type": "string",
+        "required": true
+      },
+      "timestamp":{
+        "type": "date",
+        "required": true
+      }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+  }
+  

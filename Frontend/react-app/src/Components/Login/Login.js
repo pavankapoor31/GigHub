@@ -6,18 +6,20 @@ import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import {toast} from 'react-toastify'
 import axios from "axios";
+import { BASE_URL } from "../../global_config";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
         axios.get(
-          `http://localhost:3001/api/users?filter={"where":{"email":"${user.email}"}}`
+          `${BASE_URL}/api/users?filter={"where":{"email":"${user.email}"}}`
         ).then(
           (res)=>{
             try{

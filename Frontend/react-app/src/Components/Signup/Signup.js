@@ -11,6 +11,7 @@ import "./Signup.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import axios from "axios";
+import { BASE_URL } from "../../global_config";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [fullname, setFullname] = useState("");
@@ -46,7 +47,7 @@ const Signup = () => {
             password:"NA",
             uid:user.uid
           }
-          axios.post('http://localhost:3001/api/users',payload).then(
+          axios.post(`${BASE_URL}/api/users`,payload).then(
             (res)=>{
               localStorage.setItem('profile.id',JSON.stringify(res.data.id))
             }

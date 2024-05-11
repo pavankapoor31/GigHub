@@ -5,6 +5,8 @@ import React from "react";
 import LancerProfile from "../Components/Profile/LancerProfile";
 import FreelancerFormModal from "../Components/FreelancerForm/FreelanceFormWrapper";
 import TopBar from "../Components/TopBar/TopBar";
+import Gig from "../Components/Gig/Gig";
+import Home from "../pages/Home/Home";
 
 function RouteManager() {
   return (
@@ -19,6 +21,8 @@ function RouteManager() {
                 <LancerProfile />
               </>} />
               <Route path={"/home"} element={<FreelancerFormModal open={true} onClose={()=>{}} />} />
+              <Route path={"/profile"} element={<LancerProfile />} />
+              <Route path={"/home"} element={<Home />} />
             </Routes>
         </Router>
     </div>

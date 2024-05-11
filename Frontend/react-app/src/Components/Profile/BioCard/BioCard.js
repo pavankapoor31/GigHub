@@ -18,7 +18,7 @@ export default function BioCard({info}) {
         <div className='d-flex w-100 pt-2 pb-2 pl-3 pr-3'>
           <div className='d-flex w-100 flex-column'>
             <div className='d-flex font-sans justify-content-between align-items-center'>
-              <div className='text-lg font-sans font-semibold'>{info.name}</div>
+              <div className='fs-4 font-sans font-semibold'>{info.name}</div>
               {/* <span>ICONS</span> */}
             </div>
 
@@ -55,21 +55,21 @@ export default function BioCard({info}) {
 
         <div className='col-9 d-flex justify-content-end'>
           <div className='col-3'>
-            <div className='main-color p-2 d-flex flex-column align-items-start rounded-start'>
+            <div className='main-color pt-2 pb-2 pl-4 d-flex flex-column align-items-start rounded-start'>
               <span className='text-sm font-sans'>Portfolio</span>
               <a className='text-xs' href='#'>{info.portfolio}</a>
             </div>
           </div>
 
           <div className='col-3'>
-            <div className='main-color p-2 d-flex flex-column align-items-start'>
+            <div className='main-color pt-2 pb-2 d-flex flex-column align-items-start'>
               <span className='text-sm font-sans'>Linkedin</span>
               <a className='text-xs' href='#'>{info.linkedin}</a>
             </div>
           </div>
 
           <div className='col-3'>
-            <div className='main-color p-2 d-flex flex-column align-items-start rounded-end'>
+            <div className='main-color pt-2 pb-2 d-flex flex-column align-items-start rounded-end'>
               <span className='text-sm font-sans'>Email</span>
               <a className='text-xs' href='#'>{info.email}</a>
             </div>

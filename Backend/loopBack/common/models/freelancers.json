@@ -1,0 +1,57 @@
+
+{
+    "name": "freelancers",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "properties": {
+      "name": {
+        "type": "string",
+        "required": true
+      },
+      "skills": {
+        "type": ["string"]
+      },
+      "email": {
+        "type": "string",
+        "required": true
+      },
+      "portfolio": {
+        "type": "object",
+        "properties": {
+            "portfolio": {
+                "type": "string"
+            },
+            "linkedin": {
+                "type": "string"
+            },
+            "github": {
+                "type": "string"
+            }
+          }
+      },
+      "location": {
+        "type": "string"
+      },
+      "bio":{
+        "type": "string"
+      },
+      "picture":{
+        "type": "binary"
+      },
+      "budget":{
+        "type": "number"
+      },
+      "username":{
+        "type": "string",
+        "required": true
+      }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+  }
+  

@@ -1,0 +1,10 @@
+{
+
+  "db": {
+    "name": "db",
+    "connector": "mongodb",
+    "url": "mongodb+srv://mahima:1234@hackblr.f2ndd3z.mongodb.net/?retryWrites=true&w=majority&appName=hackblr",
+    "ssl": true
+  }
+  
+}

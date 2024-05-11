@@ -1,0 +1,45 @@
+
+{
+    "name": "gigs",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "properties": {
+      "title": {
+        "type": "string",
+        "required": true
+      },
+      "description": {
+        "type": "string",
+        "required": false
+      },
+      "skills": {
+        "type": "array",
+        "required": false
+      },
+      "budget": {
+        "type": "number",
+        "required": false
+      },
+      "freelancer_id":{
+        "type": "string",
+        "required":true
+      },
+      "assigned": {
+        "type": "boolean",
+        "required": false
+      },
+      "assignee": {
+        "type": "string",
+        "required": false
+      }
+
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+  }
+  

@@ -1,0 +1,37 @@
+
+{
+    "name": "clients",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "properties": {
+      "name": {
+        "type": "string",
+        "required": true
+      },
+      "email": {
+        "type": "string",
+        "required": true
+      },
+      "location": {
+        "type": "string",
+        "required": false
+      },
+      "bio": {
+        "type": "string",
+        "required": false
+      },
+      "username": {
+        "type": "string",
+        "required": true
+      }
+
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+  }
+  

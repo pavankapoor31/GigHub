@@ -12,18 +12,38 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import axios from "axios";
 import { BASE_URL } from "../../global_config";
+import Logo from "../Logo/Logo";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
 
   const navigate = useNavigate();
   const handleSignup = async () => {
-    if (fullname.length < 2) {
+    if (fullname.trim().length < 2) {
       window.alert("Please enter full name");
       return;
     }
-    let name = fullname;
+    if (userName.trim().length <= 3) {
+      window.alert("Please enter username more than 3 letters");
+      return;
+    }
+    let name = fullname.trim();
+    let userNameExists = false;
+    await axios.get(
+      `${BASE_URL}/api/clients?filter={"where":{"userName":"${userName}"}}`
+    ).then(
+      (res)=>{
+          if(res.data.length>0){
+            userNameExists=true;
+            toast.error(`Username ${userName} already exists`)
+          }
+      }
+    )
+    if(userNameExists){
+      return;
+    }
     try {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -42,18 +62,20 @@ const Signup = () => {
             JSON.stringify(user.stsTokenManager)
           );
           const payload = {
-            username:fullname,
+            name:fullname,
             email:user.email,
             password:"NA",
-            uid:user.uid
+            uid:user.uid,
+            username:userName
           }
-          axios.post(`${BASE_URL}/api/users`,payload).then(
+          axios.post(`${BASE_URL}/api/clients`,payload).then(
             (res)=>{
               localStorage.setItem('profile.id',JSON.stringify(res.data.id))
             }
           ).catch(
             (err)=>{
               console.log(err)
+              toast.error(err)
             }
           )
           navigate("/home");
@@ -72,6 +94,10 @@ const Signup = () => {
   };
 
   return (
+    <>
+    <div className="position-absolute">
+    <Logo/>
+    </div>
     <div className=" content-wrapper d-flex align-center">
       <div className="Auth-form-container card p-4 ml-4">
         <form className="Auth-form">
@@ -85,6 +111,16 @@ const Signup = () => {
                 placeholder="Enter full name"
                 value={fullname}
                 onChange={(e) => setFullname(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Username</label>
+              <input
+                type="text"
+                className="form-control mt-1"
+                placeholder="Enter username"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value?.trim())}
               />
             </div>
             <div className="form-group mt-3">
@@ -123,6 +159,7 @@ const Signup = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

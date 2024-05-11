@@ -20,7 +20,7 @@ const Login = () => {
         // Signed in 
         const user = userCredential.user;
         axios.get(
-          `${BASE_URL}/api/users?filter={"where":{"email":"${user.email}"}}`
+          `${BASE_URL}/api/clients?filter={"where":{"email":"${user.email}"}}`
         ).then(
           (res)=>{
             try{

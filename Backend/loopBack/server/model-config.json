@@ -17,19 +17,19 @@
     "dataSource": "db"
   },
   "clients": {
-    "datasource": "db"
+    "dataSource": "db"
   },
   "gigs": {
-    "datasource": "db"
+    "dataSource": "db"
   },
   "jobs": {
-    "datasource": "db"
+    "dataSource": "db"
   },
   "reviews": {
-    "datasource": "db"
+    "dataSource": "db"
   },
   "messages": {
-    "datasource": "db"
+    "dataSource": "db"
   },
   "AccessToken": {
     "dataSource": "db",

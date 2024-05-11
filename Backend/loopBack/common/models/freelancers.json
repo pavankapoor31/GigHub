@@ -38,9 +38,6 @@
       "bio":{
         "type": "string"
       },
-      "picture":{
-        "type": "binary"
-      },
       "budget":{
         "type": "number"
       },

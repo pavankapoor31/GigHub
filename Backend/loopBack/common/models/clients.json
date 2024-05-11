@@ -16,12 +16,10 @@
         "required": true
       },
       "location": {
-        "type": "string",
-        "required": false
+        "type": "string"
       },
       "bio": {
-        "type": "string",
-        "required": false
+        "type": "string"
       },
       "username": {
         "type": "string",

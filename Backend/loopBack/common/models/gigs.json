@@ -12,12 +12,10 @@
         "required": true
       },
       "description": {
-        "type": "string",
-        "required": false
+        "type": "string"
       },
       "skills": {
-        "type": "array",
-        "required": false
+        "type": ["string"]
       },
       "budget": {
         "type": "number",

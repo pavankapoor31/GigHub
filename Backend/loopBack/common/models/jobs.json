@@ -12,28 +12,23 @@
         "required": true
       },
       "description": {
-        "type": "string",
-        "required": false
+        "type": "string"
       },
       "requiredSkills": {
-        "type": "array",
-        "required": false
+        "type": ["string"]
       },
       "budget": {
-        "type": "number",
-        "required": false
+        "type": "number"
       },
       "client_id":{
         "type": "string",
         "required":true
       },
       "assigned": {
-        "type": "boolean",
-        "required": false
+        "type": "boolean"
       },
       "assignee": {
-        "type": "string",
-        "required": false
+        "type": "string"
       }
 
     },

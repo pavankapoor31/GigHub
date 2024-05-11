@@ -16,20 +16,16 @@
         "required": true
       },
       "rating": {
-        "type": "number",
-        "required": false
+        "type": "number"
       },
       "comment": {
-        "type": "string",
-        "required": false
+        "type": "string"
       },
       "reviewedOn": {
-        "type": "date",
-        "required": false
+        "type": "date"
       },
       "reviewer": {
-        "type": "string",
-        "required": false
+        "type": "string"
       }
 
     },

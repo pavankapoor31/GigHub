@@ -16,7 +16,7 @@ export default function ChatCard({lastMsg}) {
             <p className="line-clamp-2 not-italic text-xs text-muted msg-prev">{lastMsg.message}</p>
         </div>
 
-        <div className='text-xs font-semibold pb-1 d-flex align-items-end justify-content-center'>
+        <div className='text-xs font-semibold pb-1 pr-2 d-flex align-items-end justify-content-center'>
           <span>{lastMsg.timestamp}</span>
         </div>
     </div>

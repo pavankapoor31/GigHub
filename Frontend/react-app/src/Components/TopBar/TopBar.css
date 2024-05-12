@@ -49,21 +49,27 @@
 .icons .inbox-icon,
 .icons .home-icon,
 .icons .bookmarks-icon {
-    display: inline-flex;
-    align-items: center;
-    margin-right: 10px; /* Adjust the margin between icons */
-    font-size: inherit; /* Inherit font size from parent (.icons) */
-    cursor: pointer;
+    display: inline-flex !important;
+    align-items: center !important;
+    margin-right: 10px !important; /* Adjust the margin between icons */
+    font-size: inherit !important; /* Inherit font size from parent (.icons) */
+    cursor: pointer !important;
+    border: none !important;
+    background: none !important;
 }
 
 /* Additional styles for specific icons */
 .inbox-icon svg,
 .home-icon svg,
 .bookmarks-icon svg {
-    font-size: 1.2em; /* Adjust icon size */
-    margin-right: 5px; /* Adjust the margin between icon and text */
+    font-size: 1.2em !important; /* Adjust icon size */
+    margin-right: 5px !important; /* Adjust the margin between icon and text */
 }
 
 .icons .active {
     font-weight: bold; /* Example styling for active link */
+}
+
+.new-msg-container {
+  width: 500px;
 }

@@ -32,7 +32,7 @@ function RouteManager() {
                  <Home/>
                  </>
               } />
-              <Route path={"/profile"} element={<LancerProfile />} />
+              {/* <Route path={"/profile"} element={<LancerProfile />} /> */}
               <Route path={"/home"} element={<Home />} />
             </Routes>
         </Router>

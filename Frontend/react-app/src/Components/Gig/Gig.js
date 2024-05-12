@@ -9,7 +9,7 @@ export default function Gig({gigData}) {
     const [freelancerInfo,setFreelancerInfo] = useState({})
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const [ratings,setRatings] = useState({})
     useEffect(()=>{
         if(!gigData.freelancer_id) return;
         axios.get(`${BASE_URL}/api/freelancers?filter={"where":{"or":[{"id":"${gigData.freelancer_id}"},{"username":"${gigData.freelancer_id}"}]}}`).then(
@@ -17,6 +17,7 @@ export default function Gig({gigData}) {
                 if(res.data.length>0)
                 setFreelancerInfo(res.data[0]);
                 dispatch(setFreelancerData(res.data[0]));
+                setRatings(res.data?.ratings??{})
             }
         ).catch ((err)=>{console.log(err)})
     },[gigData?.freelancer_id])
@@ -37,10 +38,10 @@ export default function Gig({gigData}) {
             <div class="">
                 <p className="line-clamp-2">{gigData.description}</p>
             </div>
-            <div>&#9733;
-                <span className='text-xs font-bold'>{''}{gigData.rating}{' '}</span>
-                <span>({freelancerInfo.noOfRating})</span>
-            </div>
+            { Object.values(ratings).length>0 && <div>&#9733;
+                <span className='text-xs font-bold'>{''}{ratings.stars}{' '}</span>
+                <span>({ratings.count})</span>
+            </div>}
             <span className='text-xs font-bold'>From &#8377;{gigData.budget} /hr</span>
         </div>
     </div>

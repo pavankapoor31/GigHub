@@ -5,8 +5,8 @@ import {
   signInWithEmailAndPassword,
   updateProfile
 } from "firebase/auth";
-import app from "../../firebase";
-import { auth } from "../../firebase";
+// import app from "../../firebase";
+import { auth } from "../../server/firebase";
 import "./Signup.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';

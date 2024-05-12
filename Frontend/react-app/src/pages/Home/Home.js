@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import Gig from '../../Components/Gig/Gig';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../server/AuthContext';
 // import GigFormWrapper from '../../Components/GigForm/GigFormWrapper';
 
 const gigDataArray = [
@@ -85,7 +87,17 @@ const gigDataArray = [
       },
   ];
 const domains = ["Frontend Development","Backend Development","Database Management","DevOps","Machine Learning"]
+
 export default function Home() {
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(!currentUser){
+      navigate(`/login`);
+    }
+  },[currentUser])
+
   return (
     <div className='h-100 w-100'>
       {/* <GigFormWrapper open={true}/> */}

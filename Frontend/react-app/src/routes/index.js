@@ -1,7 +1,7 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes, useNavigate } from "react-router-dom";
 import Login from '../Components/Login/Login'
 import Signup from '../Components/Signup/Signup'
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import LancerProfile from "../Components/Profile/LancerProfile";
 import FreelancerFormModal from "../Components/FreelancerForm/FreelanceFormWrapper";
 import TopBar from "../Components/TopBar/TopBar";
@@ -10,6 +10,7 @@ import Home from "../pages/Home/Home";
 import Messages from "../Components/Messages/Messages";
 
 function RouteManager() {
+
   return (
     <div className="bg-main parent-container">
         <Router>
@@ -33,7 +34,6 @@ function RouteManager() {
                  <Home/>
                  </>
               } />
-              {/* <Route path={"/profile"} element={<LancerProfile />} /> */}
               <Route path={"/home"} element={<Home />} />
               <Route
                 path={"/profile/messages/:messagerId"}

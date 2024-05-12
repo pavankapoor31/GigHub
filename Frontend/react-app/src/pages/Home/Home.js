@@ -1,9 +1,11 @@
-import React, { useEffect,useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Gig from '../../Components/Gig/Gig';
 import { BASE_URL } from '../../global_config';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../server/AuthContext';
 // import GigFormWrapper from '../../Components/GigForm/GigFormWrapper';
 
 // const gigDataArray = [
@@ -90,6 +92,7 @@ import { CircularProgress } from '@mui/material';
 //   ];
 
 const domains = ["Frontend Development","Backend Development","Database Management","DevOps","Machine Learning"]
+
 export default function Home() {
 const  [gigDataArray,setGigDataArray] = useState([]);
 const  [loading,setLoading] = useState(true);
@@ -114,6 +117,15 @@ const  [loading,setLoading] = useState(true);
       }
     },[role]
   )
+
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(!currentUser){
+      navigate(`/login`);
+    }
+  },[currentUser])
   if(loading) return <>
      <div className='d-flex justify-content-center mt-5'>
      <CircularProgress />

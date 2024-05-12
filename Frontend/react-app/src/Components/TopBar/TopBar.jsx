@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useContext, useEffect,useState } from 'react';
 import './TopBar.css'; // Assuming you have a CSS file for styling
 import Logo from '../Logo/Logo';
 import SearchIcon from '@mui/icons-material/Search';
@@ -17,13 +17,22 @@ import { setIsSeller,setRole } from '../../redux/actions/gighub.actions';
 import { useSelector,useDispatch } from 'react-redux'
 import axios from 'axios';
 import FreelancerFormModal from '../FreelancerForm/FreelanceFormWrapper';
+import { AuthContext } from '../../server/AuthContext';
 
 const TopBar = ({ username="User" }) => {
     
   const [userName, setUserName] = useState(username);
   const [activePage, setActivePage] = useState('home');
   const [becomeSellerPopUp, setBecomeSellerPopUp] = useState(false);
-  const navigate = useNavigate()
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(!currentUser){
+      navigate(`/login`);
+    }
+  },[currentUser])
+
   const navigatePage = (page) => {
       setActivePage(page);
       navigate(`/${page}`);

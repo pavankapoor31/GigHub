@@ -8,8 +8,40 @@ import TopBar from "../Components/TopBar/TopBar";
 import Gig from "../Components/Gig/Gig";
 import Home from "../pages/Home/Home";
 import Messages from "../Components/Messages/Messages";
+import axios from "axios";
+import { BASE_URL } from "../global_config";
+import { setRole } from "../redux/actions/gighub.actions";
+import { useDispatch } from "react-redux";
 
 function RouteManager() {
+  const dispatch = useDispatch();
+  useEffect(
+    ()=>{
+
+     let id =  localStorage.getItem('profile.id');
+      if(id){
+        id = JSON.parse(id);
+        axios.get(`${BASE_URL}/api/clients?filter={"where":{"id":"${id}"}}`).then(
+          (res)=>{
+            let client_data = res.data[0];
+            localStorage.setItem('client_data',JSON.stringify(client_data));
+          }
+        )
+        axios.get(`${BASE_URL}/api/freelancers?filter={"where":{"client_id":"${id}"}}`).then(
+          (res)=>{
+            let client_data = res.data[0];
+            localStorage.setItem('freelancer_data',JSON.stringify(client_data));
+          }
+        )
+      }
+      let tempRole = localStorage.getItem('role');
+      if(tempRole){
+         dispatch(setRole(JSON.parse(tempRole)))
+      }
+
+    },[]
+  )
+
 
   return (
     <div className="bg-main parent-container">

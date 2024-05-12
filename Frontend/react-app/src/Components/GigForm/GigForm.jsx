@@ -42,23 +42,19 @@ const GigForm = ({onClose}) => {
     e.preventDefault();
     if (validateForm()) {
       console.log(formData, 'formData');
-      let freelancerId = localStorage.getItem('profile.freelancerId');
-      if(!freelancerId){
-        let profileId = localStorage.getItem('profile.id');
-       await axios.get(`${BASE_URL}/api/freelancers?filter={"where":{"client_id":"${profileId}"}}`).then(
-            (res)=>{
-                if(res.data.length>0)
-                freelancerId = res.data[0].id
-            }
-        )
-      }
+      let freelancerId = localStorage.getItem('freelancer_data');
+      freelancerId = JSON.parse(freelancerId);
+
       if(freelancerId){
-        formData["freelancer_id"]=freelancerId;
+        formData["freelancer_id"]=freelancerId.id;
       }
       else{
         toast.error("Something went wrong! Please login as freelancer");
         return;
       }
+      axios.post(
+        `${BASE_URL}/api/gigs`,formData
+      )
       // You can replace this with API call or other logic
     } else {
       alert('Please fill out all required fields and meet the minimum requirements.');

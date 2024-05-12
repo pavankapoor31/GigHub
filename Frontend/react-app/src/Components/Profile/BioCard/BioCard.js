@@ -23,7 +23,7 @@ export default function BioCard({info}) {
             </div>
 
             <div className='d-flex justify-content-between align-items-center gap-4'>
-              <div className='text-xs'>{info.headline}</div>
+              <div className='text-xs'>{info.bio}</div>
               
               <div className='d-flex gap-2'>
                 {/* <div className='d-flex flex-column justify-content-between align-items-center'>
@@ -44,7 +44,7 @@ export default function BioCard({info}) {
 
       <div className='d-flex flex-column p-2 align-items-start'>
         <span className='text-md font-sans font-semibold'>About me</span>
-        <p className='text-xs text-slate-500'>{info.bio}{info.bio}</p>
+        <p className='text-xs text-slate-500'>{info?.bio}</p>
       </div>
 
       <div className='row align-items-center pb-2'>
@@ -57,23 +57,24 @@ export default function BioCard({info}) {
           <div className='col-3'>
             <div className='main-color pt-2 pb-2 pl-4 d-flex flex-column align-items-start rounded-start'>
               <span className='text-sm font-sans font-semibold'>Portfolio</span>
-              <a className='text-xs' href='#'>{info.portfolio}</a>
+              <a className='text-xs' href='#'>{info?.portfolio?.portfolio?.length>0?info?.portfolio?.portfolio:"Not available"}</a>
             </div>
           </div>
 
           <div className='col-3'>
             <div className='main-color pt-2 pb-2 d-flex flex-column align-items-start'>
               <span className='text-sm font-sans font-semibold'>Linkedin</span>
-              <a className='text-xs' href='#'>{info.linkedin}</a>
+              <a className='text-xs' href='#'>{info?.portfolio?.linkedin?.length>0?info?.portfolio?.linkedin:"Not available"}</a>
             </div>
           </div>
 
           <div className='col-3'>
             <div className='main-color pt-2 pb-2 d-flex flex-column align-items-start rounded-end'>
               <span className='text-sm font-sans font-semibold'>Email</span>
-              <a className='text-xs' href='#'>{info.email}</a>
+              <a className='text-xs' href={`mailTo:${info?.email}`}>{info?.email?.split('@')[0]}</a>
             </div>
           </div>
+
         </div>
       </div>
 

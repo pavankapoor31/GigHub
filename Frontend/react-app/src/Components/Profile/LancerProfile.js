@@ -4,9 +4,10 @@ import BioCard from './BioCard/BioCard'
 import LastChats from '../Last Chats/LastChats'
 import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
 import GigFormWrapper from '../GigForm/GigFormWrapper';
+import { UseSelector, useSelector } from 'react-redux/es/hooks/useSelector';
 import { BASE_URL } from '../../global_config';
 import axios from 'axios';
-import Gig from '../Gig/Gig';
+import GigCard from '../Gig/GigCard';
 const bioCardInfo = {
   name: 'Reetik',
   headline: 'Hi, I am a react developer!',
@@ -20,22 +21,56 @@ const bioCardInfo = {
 export default function LancerProfile() {
   const [isNewGig, setIsNewGig] = useState(false);
   const [myGigs, setMyGigs] = useState([]);
+  const [profileDetails,setProfileDetails] = useState({});
+  const role = useSelector(state=>state.gighubReducer.role)
+
+  useEffect(
+    ()=>{
+      let id = localStorage.getItem('profile.id');
+      id = JSON.parse(id);
+      axios.get(`${BASE_URL}/api/${role==="buyer"?'clients':'freelancers'}?filter={"where":{"or":[{"id":"${id}"},{"username":"${id}"},{"client_id":"${id}"}]}}`).then(
+        (res)=>{
+          setProfileDetails(res.data[0]);
+          console.log(res.data,'profileDetails')
+        }
+      )
+    },[role]
+  )
+
   useEffect(
     ()=>{ 
         let id = localStorage.getItem('profile.id');
         id = JSON.parse(id);
-        axios.get(`${BASE_URL}/api/gigs?filter={"where":{"or":[{"id":"${id}"},{"username":"${id}"}]}}`).then(
-          (res)=>{
-             setMyGigs(res.data);
+        if(role==="seller"){
+          let details = localStorage.getItem("freelancer_data");
+          details = JSON.parse(details)
+          if(details){
+          axios.get(`${BASE_URL}/api/gigs?filter={"where":{"or":[{"freelancer_id":"${details.id}"},{"id":"${id}"}]}}`).then(
+            (res)=>{
+               setMyGigs(res.data);
+            }
+          )}
+
+        }else {
+          let details = localStorage.getItem("client_data");
+          if(details){
+            details = JSON.parse(details)
+            console.log(details,'details12')
+            axios.get(`${BASE_URL}/api/jobs?filter={"where":{"or":[{"id":"${details.id}"},{"id":"${id}"}]}}`).then(
+              (res)=>{
+                 setMyGigs(res.data);
+              }
+            )
           }
-        )
-    },[]
+        }
+        
+    },[role]
   )
   return (
     <>
       <div className='lancerprofile-container'>
         <div className='p-4 d-flex flex-column w-100 h-100'>
-          <BioCard info={bioCardInfo} />
+          <BioCard info={profileDetails} />
 
           <div className='w-100 d-flex mt-4 border p-4 align-items-center justify-content-start'>
             <span className='font-semibold'>ACTIVE GIGS</span>
@@ -44,7 +79,7 @@ export default function LancerProfile() {
           <div className='d-flex flex-wrap mt-3 p-3'>
            {myGigs.map(
             (item)=>{
-              return <Gig gigData={item}/>
+              return <GigCard gigData={item}/>
             }
            )}
             <div className='border border-black rounded d-flex justify-content-center' style={{height: '236px', width: '312px'}}>

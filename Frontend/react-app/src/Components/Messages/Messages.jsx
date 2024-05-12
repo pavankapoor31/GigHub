@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './Messages.css'; // Import the CSS file for styling
 import { TextField, Button } from '@mui/material';
-
+import { setIsSeller,setRole } from '../../redux/actions/gighub.actions';
+import { useSelector,useDispatch } from 'react-redux'
 function Messages() {
   const { messagerId } = useParams();
   const [profileId, setProfileId] = useState('');
@@ -12,18 +13,25 @@ function Messages() {
   const [messegerUserName, setMessagerUserName] = useState('');
   const [userTypeIsSet, setUserTypeIsSet] = useState('');
   const [newMessage, setNewMessage] = useState('');
+  const isSeller = useSelector((state)=>state.gighubReducer.isSeller)
+  const freelancerId = useSelector((state)=>state.gighubReducer.freelancerId)
+  console.log(isSeller,'isSeller')
+  console.log(freelancerId,"isSeller1234")
   useEffect(() => {
-    let storedProfileId = localStorage.getItem('profile.id');
-    setProfileId(JSON.parse(storedProfileId));
-    let storedProfileUserName = localStorage.getItem('profile.username');
-    setProfileUserName(JSON.parse(storedProfileUserName));
+    if(isSeller){
+      setProfileId(freelancerId)
+    }
+    else{
+      let storedProfileId = localStorage.getItem('profile.id');
+      setProfileId(JSON.parse(storedProfileId));
+    }
   }, []);
 
   const fetchMessages = async () => {
     try {
-      if (isClient !== null && profileId !== null && messagerId!== null) {
-        const clientId = isClient ? profileId : messagerId;
-        const freelancerId = isClient ? messagerId : profileId;
+      if (isSeller !== null && profileId !== null && messagerId!== null) {
+        const clientId = isSeller ? profileId : messagerId;
+        const freelancerId = isSeller ? messagerId : profileId;
         const response = await fetch(`http://172.208.57.14:3001/api/messages?filter={"where":{"client_id":"${clientId}","freelancer_id":"${freelancerId}"},"order":"timestamp ASC"}`);
         const data = await response.json();
         setMessages(data);
@@ -64,16 +72,16 @@ function Messages() {
   }, [profileId]);
 
   useEffect(() => {
-    if (isClient !== null && profileId !== null && messagerId!== null) {
-      const clientId = isClient ? profileId : messagerId;
-      const freelancerId = isClient ? messagerId : profileId;
+    if (isSeller !== null && profileId !== null && messagerId!== null) {
+      const clientId = isSeller ? profileId : messagerId;
+      const freelancerId = isSeller ? messagerId : profileId;
 
       fetch(`http://172.208.57.14:3001/api/messages?filter={"where":{"client_id":"${clientId}","freelancer_id":"${freelancerId}"}}`)
         .then(response => response.json())
         .then(data => setMessages(data))
         .catch(error => console.error('Error fetching messages:', error));
     }
-  }, [isClient, profileId, messagerId]);
+  }, [isSeller, profileId, messagerId]);
   const sendMessage = async () => {
     try {
       if (profileId && messagerId && newMessage.trim() !== '') {
@@ -83,8 +91,8 @@ function Messages() {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            client_id: isClient ? profileId : messagerId,
-            freelancer_id: isClient ? messagerId : profileId,
+            client_id: isSeller ? profileId : messagerId,
+            freelancer_id: isSeller ? messagerId : profileId,
             message: newMessage,
             timestamp: new Date().toISOString(),
             sentBy: profileId

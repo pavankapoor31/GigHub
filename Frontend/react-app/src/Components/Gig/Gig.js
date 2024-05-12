@@ -1,24 +1,32 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { BASE_URL } from '../../global_config'
+import { useDispatch } from 'react-redux'
+import { setFreelancerData } from '../../redux/actions/gighub.actions'
+import { useNavigate } from 'react-router-dom'
 
 export default function Gig({gigData}) {
     const [freelancerInfo,setFreelancerInfo] = useState({})
-    useEffect(
-        ()=>{
-            if(!gigData.freelancer_id) return;
-            axios.get(`${BASE_URL}/api/freelancers?filter={"where":{"or":[{"id":"${gigData.freelancer_id}"},{"username":"${gigData.freelancer_id}"}]}}`).then(
-                (res)=>{
-                    if(res.data.length>0)
-                    setFreelancerInfo(res.data[0])
-                }
-            ).catch ((err)=>{
-                console.log(err)
-            })
-        },[gigData?.freelancer_id]
-    )
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(!gigData.freelancer_id) return;
+        axios.get(`${BASE_URL}/api/freelancers?filter={"where":{"or":[{"id":"${gigData.freelancer_id}"},{"username":"${gigData.freelancer_id}"}]}}`).then(
+            (res)=>{
+                if(res.data.length>0)
+                setFreelancerInfo(res.data[0]);
+                dispatch(setFreelancerData(res.data[0]));
+                navigate('/profile');
+            }
+        ).catch ((err)=>{console.log(err)})
+    },[gigData?.freelancer_id])
+
+
   return (
-    <div className="card border-0 m-2" style={{width: '19rem'}}>
+    <div className="card border-0 m-2 cursor-pointer" style={{width: '19rem'}}
+        onClick={() => {}}
+    >
         <img src={gigData.image} className="rounded mb-3" 
             alt="No image" style={{height: '160px'}}/>
         <div className="card-body p-0">

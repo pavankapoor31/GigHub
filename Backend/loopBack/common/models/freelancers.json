@@ -47,6 +47,9 @@
       },
       "experience":{
         "type": "number"
+      },
+      "client_id":{
+        "type": "string"
       }
     },
     "validations": [],

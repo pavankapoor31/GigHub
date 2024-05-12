@@ -4,6 +4,7 @@ FormHelperText, } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
 import { BASE_URL } from '../../global_config';
+import { toast } from 'react-toastify';
 
 const FreelancerForm = ({onClose}) => {
   const [formData, setFormData] = useState({
@@ -106,6 +107,12 @@ const FreelancerForm = ({onClose}) => {
         "linkedin":linkedin
       }
     };
+    let client_id = localStorage.getItem('profile.id');
+    if(!client_id){
+      toast.error("Error while parsing client information");
+    }
+    client_id = JSON.parse(client_id)
+    freelancerData["client_id"] = client_id;
     console.log(freelancerData,'freelancerData'); // You can replace this with your actual function to submit the data
   };
 

@@ -13,7 +13,7 @@ const bioCardInfo = {
 
 export default function LancerProfile() {
   return (
-    <div className='p-2 w-100'>
+    <div className='p-2' style={{maxWidth:'900px'}}>
       <BioCard info={bioCardInfo} />
     </div>
   )

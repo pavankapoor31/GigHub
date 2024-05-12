@@ -1,20 +1,36 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { BASE_URL } from '../../global_config'
 
 export default function Gig({gigData}) {
+    const [freelancerInfo,setFreelancerInfo] = useState({})
+    useEffect(
+        ()=>{
+            if(!gigData.freelancer_id) return;
+            axios.get(`${BASE_URL}/api/freelancers?filter={"where":{"or":[{"id":"${gigData.freelancer_id}"},{"username":"${gigData.freelancer_id}"}]}}`).then(
+                (res)=>{
+                    if(res.data.length>0)
+                    setFreelancerInfo(res.data[0])
+                }
+            ).catch ((err)=>{
+                console.log(err)
+            })
+        },[gigData?.freelancer_id]
+    )
   return (
-    <div className="card border-0 m-2" style={{width: '18rem'}}>
-        <img src={(gigData.gigImg)} className="rounded mb-3" 
-            alt="..." style={{height: '160px'}}/>
+    <div className="card border-0 m-2" style={{width: '19rem'}}>
+        <img src={gigData.image} className="rounded mb-3" 
+            alt="No image" style={{height: '160px'}}/>
         <div className="card-body p-0">
-            <span className="text-sm font-bold">{gigData.username}</span>
+            <span className="text-sm font-bold">{freelancerInfo.name}</span>
             <div class="">
-                <p className="line-clamp-2">{gigData.desc}</p>
+                <p className="line-clamp-2">{gigData.description}</p>
             </div>
             <div>&#9733;
-                <span className='text-xs font-bold'>{' '}{gigData.rating}{' '}</span>
-                <span>({gigData.noOfRating})</span>
+                <span className='text-xs font-bold'>{''}{gigData.rating}{' '}</span>
+                <span>({freelancerInfo.noOfRating})</span>
             </div>
-            <span className='text-xs font-bold'>From &#8377;{gigData.price}</span>
+            <span className='text-xs font-bold'>From &#8377;{gigData.budget} /hr</span>
         </div>
     </div>
   )

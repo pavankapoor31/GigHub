@@ -20,7 +20,18 @@ function RouteManager() {
                 <TopBar/>
                 <LancerProfile />
               </>} />
-              <Route path={"/home"} element={<FreelancerFormModal open={true} onClose={()=>{}} />} />
+              <Route path={"/home"} element={
+                <>
+                 <TopBar/>
+                 <Home/>
+                 </>
+              } />
+              <Route path={"/bookmarks"} element={
+                <>
+                 <TopBar/>
+                 <Home/>
+                 </>
+              } />
               <Route path={"/profile"} element={<LancerProfile />} />
               <Route path={"/home"} element={<Home />} />
             </Routes>

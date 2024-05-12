@@ -5,9 +5,17 @@ import SearchIcon from '@mui/icons-material/Search';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import { useNavigate } from 'react-router-dom';
 const TopBar = ({ username="User" }) => {
     
-  const [userName, setUserName] = useState(username)
+  const [userName, setUserName] = useState(username);
+  const [activePage, setActivePage] = useState('home');
+  const navigate = useNavigate()
+  const navigatePage = (page) => {
+      setActivePage(page);
+      navigate(`/${page}`);
+      // Navigate to the specified page using your navigation logic
+  };
   useEffect(
     ()=>{
         try{
@@ -33,11 +41,16 @@ const TopBar = ({ username="User" }) => {
         />
      </div>
      <div className="icons">
-        <span className="inbox-icon"><MailOutlineIcon />Inbox</span>
-        <span className="home-icon"><HomeOutlinedIcon/> Home </span>
-        <span className="bookmarks-icon"><BookmarkBorderIcon/>Bookmarks</span>
-    <div className="welcome-user">Welcome, {userName}</div>
-    </div>
+            <span className={`inbox-icon`} onClick={() => {}}>
+                <MailOutlineIcon /> Inbox
+            </span>
+            <span className={`home-icon ${activePage === 'home' ? 'active' : ''}`} onClick={() => navigatePage('home')}>
+                <HomeOutlinedIcon/> Home
+            </span>
+            <span className={`bookmarks-icon ${activePage === 'bookmarks' ? 'active' : ''}`} onClick={() => navigatePage('bookmarks')}>
+                <BookmarkBorderIcon/> Bookmarks
+            </span>
+        </div>
     </div>
   );
 };

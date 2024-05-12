@@ -1,5 +1,6 @@
 import React from 'react'
 import Gig from '../../Components/Gig/Gig';
+// import GigFormWrapper from '../../Components/GigForm/GigFormWrapper';
 
 const gigDataArray = [
     {
@@ -83,10 +84,11 @@ const gigDataArray = [
         price: 1800,
       },
   ];
-
+const domains = ["Frontend Development","Backend Development","Database Management","DevOps","Machine Learning"]
 export default function Home() {
   return (
     <div className='h-100 w-100'>
+      {/* <GigFormWrapper open={true}/> */}
       <div className='d-flex flex-wrap'>
         {
             gigDataArray.map((item) => <Gig gigData={item} />)

@@ -53,6 +53,7 @@
     align-items: center;
     margin-right: 10px; /* Adjust the margin between icons */
     font-size: inherit; /* Inherit font size from parent (.icons) */
+    cursor: pointer;
 }
 
 /* Additional styles for specific icons */
@@ -61,4 +62,8 @@
 .bookmarks-icon svg {
     font-size: 1.2em; /* Adjust icon size */
     margin-right: 5px; /* Adjust the margin between icon and text */
+}
+
+.icons .active {
+    font-weight: bold; /* Example styling for active link */
 }

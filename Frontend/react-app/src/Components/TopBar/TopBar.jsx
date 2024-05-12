@@ -28,7 +28,9 @@ const TopBar = ({ username="User" }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(!currentUser){
+    let profileId = localStorage.getItem('profile.id');
+    profileId = JSON.parse(profileId);
+    if(!currentUser && !profileId){
       navigate(`/login`);
     }
   },[currentUser])

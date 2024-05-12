@@ -1,10 +1,12 @@
 import './lancerprofile.css'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BioCard from './BioCard/BioCard'
 import LastChats from '../Last Chats/LastChats'
 import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
 import GigFormWrapper from '../GigForm/GigFormWrapper';
-
+import { BASE_URL } from '../../global_config';
+import axios from 'axios';
+import Gig from '../Gig/Gig';
 const bioCardInfo = {
   name: 'Reetik',
   headline: 'Hi, I am a react developer!',
@@ -17,7 +19,18 @@ const bioCardInfo = {
 
 export default function LancerProfile() {
   const [isNewGig, setIsNewGig] = useState(false);
-
+  const [myGigs, setMyGigs] = useState([]);
+  useEffect(
+    ()=>{ 
+        let id = localStorage.getItem('profile.id');
+        id = JSON.parse(id);
+        axios.get(`${BASE_URL}/api/gigs?filter={"where":{"or":[{"id":"${id}"},{"username":"${id}"}]}}`).then(
+          (res)=>{
+             setMyGigs(res.data);
+          }
+        )
+    },[]
+  )
   return (
     <>
       <div className='lancerprofile-container'>
@@ -29,7 +42,11 @@ export default function LancerProfile() {
           </div>
 
           <div className='d-flex flex-wrap mt-3 p-3'>
-            ...gigs
+           {myGigs.map(
+            (item)=>{
+              return <Gig gigData={item}/>
+            }
+           )}
             <div className='border border-black rounded d-flex justify-content-center' style={{height: '236px', width: '312px'}}>
               <button onClick={() => setIsNewGig(true)}>
                 <AddCircleSharpIcon style={{height: '90px', width: '90px'}}></AddCircleSharpIcon>
@@ -39,7 +56,6 @@ export default function LancerProfile() {
             </div>
           </div>
         </div>
-          
         <div className='last-chats-container'>
           <LastChats />
         </div>

@@ -7,6 +7,7 @@ import FreelancerFormModal from "../Components/FreelancerForm/FreelanceFormWrapp
 import TopBar from "../Components/TopBar/TopBar";
 import Gig from "../Components/Gig/Gig";
 import Home from "../pages/Home/Home";
+import Messages from "../Components/Messages/Messages";
 
 function RouteManager() {
   return (
@@ -34,6 +35,12 @@ function RouteManager() {
               } />
               {/* <Route path={"/profile"} element={<LancerProfile />} /> */}
               <Route path={"/home"} element={<Home />} />
+              <Route
+                path={"/profile/messages/:messagerId"}
+                element={
+                    < Messages/>
+                }
+              />
             </Routes>
         </Router>
     </div>

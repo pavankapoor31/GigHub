@@ -47,16 +47,16 @@ const  [loading,setLoading] = useState(true);
   </>
   return (
   <>
-    <div className='h-100 w-100' style={{overflowY:'auto'}}>
+    <div className='h-100 w-100'>
       {role==="buyer"? <h3 className='pl-2'> Gigs you might want to check! </h3> : <h3> Jobs you might want to check!</h3>}
-      {role==="buyer" && <div className='d-flex flex-wrap gap-2' style={{height:'calc(100vh - 2.5rem'}}>
+      {role==="buyer" && <div className='d-flex flex-wrap overflow-auto align-itens-center justify-content-center' style={{height:'calc(100vh - 2.5rem'}}>
         {
             gigDataArray.map((item) => <Gig gigData={item}  key = {item.id}/>)
         }
       </div>}
-      {role==="seller" && <div className='d-flex flex-wrap gap-2' style={{height:'calc(100vh - 2.5rem'}}>
+      {role==="seller" && <div className='d-flex flex-wrap overflow-auto align-itens-center justify-content-center' style={{height:'calc(100vh - 2.5rem'}}>
         {
-            gigDataArray.map((item) => <Gig gigData={item}  key = {item.id}/>)
+            gigDataArray.map((item) => <Gig gigData={item} key = {item.id}/>)
         }
       </div>}
     </div>

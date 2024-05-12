@@ -115,7 +115,7 @@ const Signup = () => {
                 onChange={(e) => setFullname(e.target.value)}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group mt-3">
               <label>Username</label>
               <input
                 type="text"

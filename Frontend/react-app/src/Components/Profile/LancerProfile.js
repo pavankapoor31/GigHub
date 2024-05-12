@@ -1,3 +1,4 @@
+import './lancerprofile.css'
 import React from 'react'
 import BioCard from './BioCard/BioCard'
 import LastChats from '../Last Chats/LastChats'
@@ -14,9 +15,12 @@ const bioCardInfo = {
 
 export default function LancerProfile() {
   return (
-    <div className='w-100 h-100 border border-danger'>
-      <div className='p-2 d-flex w-100 border'>
+    <div className='lancerprofile-container'>
+      <div className='p-4 d-flex w-100 h-100'>
         <BioCard info={bioCardInfo} />
+      </div>
+        
+      <div className='last-chats-container'>
         <LastChats />
       </div>
     </div>

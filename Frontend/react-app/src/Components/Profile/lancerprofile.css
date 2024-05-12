@@ -1,0 +1,10 @@
+.lancerprofile-container {
+    height: calc(100% - 70px);
+    width: 100%;
+    display: flex;
+}
+
+.last-chats-container{
+    height: 100%;
+    width: 45%;
+}

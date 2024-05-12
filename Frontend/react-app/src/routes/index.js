@@ -10,7 +10,7 @@ import Home from "../pages/Home/Home";
 
 function RouteManager() {
   return (
-    <div className="bg-main">
+    <div className="bg-main parent-container">
         <Router>
           {/* <Sidebar /> */}
             <Routes>

@@ -6,7 +6,7 @@ export default function BioCard({info}) {
 
 
   return (
-    <div className='d-flex flex-column border rounded-top'>
+    <div className='d-flex flex-column border h-fit fit-content rounded'>
       <div className='main-color bio-card-container d-flex justify-content-between rounded-top'>
         
         <img src={require('../../../assets/images/profileImage.jpg')}

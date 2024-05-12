@@ -31,3 +31,9 @@
 .ml-n2{
   margin-left: -0.25rem;
 }
+
+.parent-container{
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+}

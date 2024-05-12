@@ -19,7 +19,6 @@ export default function LancerProfile() {
   const [isNewGig, setIsNewGig] = useState(false);
 
   return (
-
     <>
       <div className='lancerprofile-container'>
         <div className='p-4 d-flex flex-column w-100 h-100'>

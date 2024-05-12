@@ -11,9 +11,15 @@ app = Flask(__name__)
 
 def salary_prediction():
     input = request.get_json()
-    data = pd.read_csv('Salary_data.csv')
-    x = data.YearsExperience.values.reshape(-1,1)
-    y = data.Salary.values.reshape(-1,1)
+    # data = pd.read_csv('Salary_data.csv')
+    url = "http://172.208.57.14:3001/api/salaries"
+    response = requests.get(url)
+
+    data = response.json()
+    df = pd.DataFrame(data)
+    data = df.drop(columns=['id'])
+    x = data.experience.values.reshape(-1,1)
+    y = data.pay.values.reshape(-1,1)
     X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 0.3, random_state = 0)
     model= LinearRegression()
     model.fit(x,y)
@@ -24,4 +30,4 @@ def salary_prediction():
 # salary_prediction()
 
 if __name__ == '__main__':
-    app.run(debug=True, port=2303)
+    app.run(host='0.0.0.0', port=2303)

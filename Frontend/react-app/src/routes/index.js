@@ -12,6 +12,7 @@ import axios from "axios";
 import { BASE_URL } from "../global_config";
 import { setRole } from "../redux/actions/gighub.actions";
 import { useDispatch } from "react-redux";
+import ThirdPartyBio from "../Components/Profile/BioCard/ThirdPartyBio";
 
 function RouteManager() {
   const dispatch = useDispatch();
@@ -71,6 +72,12 @@ function RouteManager() {
                 path={"/profile/messages/:messagerId"}
                 element={
                     < Messages/>
+                }
+              />
+              <Route
+                path={"/details/:gigId"}
+                element={
+                    <ThirdPartyBio/>
                 }
               />
             </Routes>

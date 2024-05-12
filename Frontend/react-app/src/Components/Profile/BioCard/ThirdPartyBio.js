@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { BASE_URL } from '../../../global_config'
 import axios from 'axios'
+import MessagesProp from '../../Messages/MessagesProp'
 export default function ThirdPartyBio({id,role}) {
 const [gigData, setGigData] = useState({})
 const {gigId} = useParams();
@@ -122,7 +123,7 @@ if(loading){
                 </>
            
         }
-
+        <MessagesProp messagerId ={freeLancerData?.id}/>
     </div>
   )
 }

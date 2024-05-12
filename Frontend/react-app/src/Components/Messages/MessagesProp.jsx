@@ -6,8 +6,7 @@ import { setIsSeller,setRole } from '../../redux/actions/gighub.actions';
 import { useSelector,useDispatch } from 'react-redux'
 import { BASE_URL } from '../../global_config';
 import axios from 'axios';
-function Messages() {
-  const { messagerId } = useParams();
+function MessagesProp({messagerId}) {
   const [profileId, setProfileId] = useState('');
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
@@ -114,7 +113,7 @@ function Messages() {
     }
   };
   return (
-    <div className="chat-container position-absolute bottom-0 overflow-hidden msg-bg">
+    <div className="chat-container position-absolute bottom-0 overflow-hidden">
       <div className='d-flex flex-column h-100 w-100 overflow-auto'>
         {messages.map(message => (
           <div className={`d-flex align-items-center border ${message.sentBy === profileId ? 'sent' : 'received'}`} key={message.id}>
@@ -138,4 +137,4 @@ function Messages() {
   );
 }
 
-export default Messages;
+export default MessagesProp;

@@ -35,13 +35,61 @@ const gigDataArray = [
       desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius velit voluptates tenetur minus eligendi illum repellendus nisi exercitationem reiciendis alias, tempora, quisquam officiis, optio rem. Officia incidunt dolores ut enim.',
       price: 1800,
     },
+    {
+        username: 'Emma',
+        gigImg: 'https://source.unsplash.com/random/150x150/?food',
+        rating: 4.2,
+        noOfRating: 80,
+        desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius velit voluptates tenetur minus eligendi illum repellendus nisi exercitationem reiciendis alias, tempora, quisquam officiis, optio rem. Officia incidunt dolores ut enim.',
+        price: 1100,
+      },
+      {
+        username: 'Michael',
+        gigImg: 'https://source.unsplash.com/random/150x150/?food',
+        rating: 4.9,
+        noOfRating: 150,
+        desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius velit voluptates tenetur minus eligendi illum repellendus nisi exercitationem reiciendis alias, tempora, quisquam officiis, optio rem. Officia incidunt dolores ut enim.',
+        price: 1800,
+      },
+      {
+        username: 'Emma',
+        gigImg: 'https://source.unsplash.com/random/150x150/?food',
+        rating: 4.2,
+        noOfRating: 80,
+        desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius velit voluptates tenetur minus eligendi illum repellendus nisi exercitationem reiciendis alias, tempora, quisquam officiis, optio rem. Officia incidunt dolores ut enim.',
+        price: 1100,
+      },
+      {
+        username: 'Michael',
+        gigImg: 'https://source.unsplash.com/random/150x150/?food',
+        rating: 4.9,
+        noOfRating: 150,
+        desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius velit voluptates tenetur minus eligendi illum repellendus nisi exercitationem reiciendis alias, tempora, quisquam officiis, optio rem. Officia incidunt dolores ut enim.',
+        price: 1800,
+      },
+      {
+        username: 'Emma',
+        gigImg: 'https://source.unsplash.com/random/150x150/?food',
+        rating: 4.2,
+        noOfRating: 80,
+        desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius velit voluptates tenetur minus eligendi illum repellendus nisi exercitationem reiciendis alias, tempora, quisquam officiis, optio rem. Officia incidunt dolores ut enim.',
+        price: 1100,
+      },
+      {
+        username: 'Michael',
+        gigImg: 'https://source.unsplash.com/random/150x150/?food',
+        rating: 4.9,
+        noOfRating: 150,
+        desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius velit voluptates tenetur minus eligendi illum repellendus nisi exercitationem reiciendis alias, tempora, quisquam officiis, optio rem. Officia incidunt dolores ut enim.',
+        price: 1800,
+      },
   ];
 const domains = ["Frontend Development","Backend Development","Database Management","DevOps","Machine Learning"]
 export default function Home() {
   return (
     <div className='h-100 w-100'>
       {/* <GigFormWrapper open={true}/> */}
-      <div className='d-flex'>
+      <div className='d-flex flex-wrap'>
         {
             gigDataArray.map((item) => <Gig gigData={item} />)
         }

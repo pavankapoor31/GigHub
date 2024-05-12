@@ -6,6 +6,12 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { useNavigate } from 'react-router-dom';
+import LastChats from '../Last Chats/LastChats';
+import Popover from '@mui/material/Popover';
+import Typography from '@mui/material/Typography';
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
+import { Button } from '@mui/material';
+
 import { BASE_URL } from '../../global_config';
 import { setIsSeller,setRole } from '../../redux/actions/gighub.actions';
 import { useSelector,useDispatch } from 'react-redux'
@@ -112,9 +118,31 @@ const TopBar = ({ username="User" }) => {
             />
      </div>
      <div className="icons">
-            <span className={`inbox-icon`} onClick={() => {}}>
-                <MailOutlineIcon /> Inbox
-            </span>
+            <PopupState variant="popover" popupId="demo-popup-popover">
+                    {(popupState) => (
+                        <div>
+                            <Button className={`inbox-icon`} {...bindTrigger(popupState)}>
+                                <Typography style={{ textTransform: 'none', color: 'black', display:'flex', alignItems: 'center' }} >
+                                    <MailOutlineIcon />
+                                    Inbox
+                                </Typography>
+                            </Button>
+                            <Popover
+                                {...bindPopover(popupState)}
+                                anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'center',
+                                }}
+                                transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'center',
+                                }}
+                            >
+                                <div className='new-msg-container'><LastChats /></div> 
+                            </Popover>
+                        </div>
+                    )}
+            </PopupState>
             <span className={`home-icon ${activePage === 'home' ? 'active' : ''}`} onClick={() => navigatePage('home')}>
                 <HomeOutlinedIcon/> Home
             </span>

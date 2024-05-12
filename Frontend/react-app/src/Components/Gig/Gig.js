@@ -11,7 +11,7 @@ export default function Gig({gigData}) {
                 <p className="line-clamp-2">{gigData.desc}</p>
             </div>
             <div>&#9733;
-                <span className='text-xs font-bold'>{gigData.rating}</span>
+                <span className='text-xs font-bold'>{' '}{gigData.rating}{' '}</span>
                 <span>({gigData.noOfRating})</span>
             </div>
             <span className='text-xs font-bold'>From &#8377;{gigData.price}</span>

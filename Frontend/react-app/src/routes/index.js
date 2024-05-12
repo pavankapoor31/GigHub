@@ -11,7 +11,7 @@ import Messages from "../Components/Messages/Messages";
 
 function RouteManager() {
   return (
-    <div className="bg-main">
+    <div className="bg-main parent-container">
         <Router>
           {/* <Sidebar /> */}
             <Routes>
@@ -33,7 +33,7 @@ function RouteManager() {
                  <Home/>
                  </>
               } />
-              <Route path={"/profile"} element={<LancerProfile />} />
+              {/* <Route path={"/profile"} element={<LancerProfile />} /> */}
               <Route path={"/home"} element={<Home />} />
               <Route
                 path={"/profile/messages/:messagerId"}

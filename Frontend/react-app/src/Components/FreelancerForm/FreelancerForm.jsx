@@ -6,7 +6,7 @@ import axios from 'axios';
 import { BASE_URL } from '../../global_config';
 import { toast } from 'react-toastify';
 import { useSelector,useDispatch } from 'react-redux'
-import { setFreelancerId, setIsSeller } from '../../redux/actions/gighub.actions';
+import { setFreelancerData, setFreelancerId, setIsSeller } from '../../redux/actions/gighub.actions';
 import { useNavigate } from 'react-router-dom';
 const FreelancerForm = ({onClose}) => {
   const [formData, setFormData] = useState({
@@ -130,6 +130,7 @@ const dispatch = useDispatch();
                 dispatch(setIsSeller(true));
                 dispatch(setFreelancerId(res.data.id))
                 localStorage.setItem('freelancerId',JSON.stringify(res.data.id));
+                dispatch(setFreelancerData(freelancerData))
                 navigate('/profile')
               }
             },[]

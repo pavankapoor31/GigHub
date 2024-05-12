@@ -35,7 +35,7 @@ const gigDataArray = [
       price: 1800,
     },
   ];
-
+const domains = ["Frontend Development","Backend Development","Database Management","DevOps","Machine Learning"]
 export default function Home() {
   return (
     <div className='h-100 w-100'>

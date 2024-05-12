@@ -7,7 +7,7 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../global_config';
-import { setIsSeller } from '../../redux/actions/gighub.actions';
+import { setIsSeller,setRole } from '../../redux/actions/gighub.actions';
 import { useSelector,useDispatch } from 'react-redux'
 import axios from 'axios';
 import FreelancerFormModal from '../FreelancerForm/FreelanceFormWrapper';
@@ -25,23 +25,26 @@ const TopBar = ({ username="User" }) => {
   };
   const dispatch = useDispatch();
   const isSeller = useSelector((state)=>state.gighubReducer.isSeller)
+  const role = useSelector((state)=>state.gighubReducer.role)
   const checkIfFreelancer = async()=>{
     try{
-        let pId = localStorage.getItem('profile.id');
-        pId = JSON.parse(pId);
+        let email = localStorage.getItem('profile.email');
+        email = JSON.parse(email);
         let userIsFreelancer=false
-        debugger;
         await axios.get(
-            `${BASE_URL}/api/freelancers?filter={"where":{"client_id":"${pId}"}}`
+            `${BASE_URL}/api/freelancers?filter={"where":{"email":"${email}"}}`
         ).then(
             (res)=>{
                 if(res.data.length>0){
-                    userIsFreelancer = true;}
+                    userIsFreelancer = true;
+                return true
+            }
                 else {
                     console.log('hellofalse')
                 }
             }
         )
+        console.log(userIsFreelancer,'userIsFreelancer')
         return userIsFreelancer
     }
     catch (err) {
@@ -49,16 +52,24 @@ const TopBar = ({ username="User" }) => {
     }
 
   }
+  async function checkSellerStatus() {
+    try {
+      const isSellerTrue = await checkIfFreelancer();
+      console.log(isSellerTrue, 'isSellerTrue');
+      dispatch(setIsSeller(isSellerTrue));
+    } catch (error) {
+      console.error('Error checking seller status:', error);
+      dispatch(setIsSeller(false)); // Assuming false as a default value in case of an error
+    }
+  }
   useEffect(
     ()=>{
-        let isSellerTrue = checkIfFreelancer();
-        if(isSellerTrue===true)
-        dispatch(setIsSeller(true))
-        else  dispatch(setIsSeller(false))
+          // Call the function wherever needed
+          checkSellerStatus();
     },[]
   )
-  const handleClickOnBecomeFreelancer = ()=>{
-      let isFreelancerAlready = checkIfFreelancer();
+  const handleClickOnBecomeFreelancer = async ()=>{
+      let isFreelancerAlready = await checkIfFreelancer();
       if(isFreelancerAlready===true){
          dispatch(setIsSeller(true))
       }
@@ -85,6 +96,11 @@ const TopBar = ({ username="User" }) => {
         console.log(isSeller,'isSeller')
     },[isSeller]
   )
+  const handleSwitchRole = ()=>{
+    if(role==="buyer")
+    dispatch(setRole("seller"))
+    else dispatch(setRole("buyer"))
+  }
   return (
     <>
     <div className="topbar">
@@ -108,12 +124,16 @@ const TopBar = ({ username="User" }) => {
             {!isSeller && <span className={`bookmarks-icon border-1 px-2 py-1 border-primary`}  onClick={() => handleClickOnBecomeFreelancer()}>
                Become a freelancer
             </span>}
+                {isSeller && <span className={`bookmarks-icon border-1 px-2 py-1 border-primary`}  onClick={() => handleSwitchRole()}>
+               Switch to {role==="buyer"?"seller":"buyer"}
+            </span>}
             <div className="welcome-user">Welcome, {userName}!</div>
         </div>
     </div>
     {
         becomeSellerPopUp && <FreelancerFormModal open={becomeSellerPopUp} onClose={()=>setBecomeSellerPopUp(false)}/>
     }
+
     </>
   );
 };

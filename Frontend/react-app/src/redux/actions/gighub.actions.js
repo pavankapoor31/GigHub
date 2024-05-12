@@ -1,5 +1,5 @@
 
-import { USERMODE,ISSELLER ,SETFREELANCERID,SETROLE} from "../types/gighub.types";
+import { USERMODE,ISSELLER ,SETFREELANCERID,SETROLE,SETFREELANCERDATA,SETCLIENTDATA} from "../types/gighub.types";
 
 export const setUserMode = (data) => (dispatch) => {
   dispatch({
@@ -22,6 +22,18 @@ export const setFreelancerId = (data) => (dispatch) => {
 export const setRole = (data) => (dispatch) => {
   dispatch({
     type: SETROLE,
+    payload: data,
+  });
+};
+export const setFreelancerData = (data) => (dispatch) => {
+  dispatch({
+    type: SETFREELANCERDATA,
+    payload: data,
+  });
+};
+export const setClientData = (data) => (dispatch) => {
+  dispatch({
+    type: SETCLIENTDATA,
     payload: data,
   });
 };

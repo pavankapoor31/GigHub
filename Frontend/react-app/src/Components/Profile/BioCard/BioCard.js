@@ -1,6 +1,7 @@
 import React from 'react'
 import './BioCard.css'
 import { ReactComponent as LocationIcon } from '../../../assets/images/mapIcon.svg'
+import { Rating } from '@mui/material'
 
 export default function BioCard({info}) {
 
@@ -26,15 +27,7 @@ export default function BioCard({info}) {
               <div className='text-xs'>{info.bio}</div>
               
               <div className='d-flex gap-2'>
-                {/* <div className='d-flex flex-column justify-content-between align-items-center'>
-                  <span className='text-sm font-sans font-semibold'>Followers</span>
-                  <span className='text-xs'>{info.followers}</span>
-                </div>
-
-                <div className='d-flex flex-column justify-content-between align-items-center'>
-                  <span className='text-sm font-sans font-semibold'>Following</span>
-                  <span className='text-xs'>{info.following}</span>
-                </div> */}
+               <Rating/>
               </div>
             </div>
           </div>

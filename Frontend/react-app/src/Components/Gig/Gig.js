@@ -17,15 +17,18 @@ export default function Gig({gigData}) {
                 if(res.data.length>0)
                 setFreelancerInfo(res.data[0]);
                 dispatch(setFreelancerData(res.data[0]));
-                navigate('/profile');
             }
         ).catch ((err)=>{console.log(err)})
     },[gigData?.freelancer_id])
 
-
+    const handleOpenGig = ()=>{
+        if(gigData.freelancer_id){
+            navigate(`/details/${gigData.id}`)
+        }
+    }
   return (
     <div className="card border-0 m-2 cursor-pointer" style={{width: '19rem'}}
-        onClick={() => {}}
+        onClick={() => {handleOpenGig()}}
     >
         <img src={gigData.image} className="rounded mb-3" 
             alt="No image" style={{height: '160px'}}/>

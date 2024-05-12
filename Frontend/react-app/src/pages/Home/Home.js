@@ -46,10 +46,16 @@ const  [loading,setLoading] = useState(true);
      </div>
   </>
   return (
+<<<<<<< Updated upstream
   <>
     <div className='h-100 w-100' style={{overflowY:'auto'}}>
       {role==="buyer"? <h3 className='pl-2'> Gigs you might want to check! </h3> : <h3> Jobs you might want to check!</h3>}
       {role==="buyer" && <div className='d-flex flex-wrap gap-2' style={{height:'calc(100vh - 2.5rem'}}>
+=======
+    <div className='h-100 w-100 d-flex overflow-auto align-itens-center justify-content-center'>
+      {/* <GigFormWrapper open={true}/> */}
+      <div className='d-flex flex-wrap align-itens-center justify-content-center'>
+>>>>>>> Stashed changes
         {
             gigDataArray.map((item) => <Gig gigData={item}  key = {item.id}/>)
         }

@@ -1,7 +1,7 @@
 // src/components/Login.js
 import { useState } from "react";
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth } from "../../server/firebase";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import {toast} from 'react-toastify'

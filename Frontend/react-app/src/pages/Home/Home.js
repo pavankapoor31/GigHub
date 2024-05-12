@@ -46,26 +46,29 @@ const  [loading,setLoading] = useState(true);
      </div>
   </>
   return (
-<<<<<<< Updated upstream
+    
   <>
-    <div className='h-100 w-100' style={{overflowY:'auto'}}>
-      {role==="buyer"? <h3 className='pl-2'> Gigs you might want to check! </h3> : <h3> Jobs you might want to check!</h3>}
-      {role==="buyer" && <div className='d-flex flex-wrap gap-2' style={{height:'calc(100vh - 2.5rem'}}>
-=======
-    <div className='h-100 w-100 d-flex overflow-auto align-itens-center justify-content-center'>
-      {/* <GigFormWrapper open={true}/> */}
-      <div className='d-flex flex-wrap align-itens-center justify-content-center'>
->>>>>>> Stashed changes
-        {
-            gigDataArray.map((item) => <Gig gigData={item}  key = {item.id}/>)
-        }
-      </div>}
-      {role==="seller" && <div className='d-flex flex-wrap gap-2' style={{height:'calc(100vh - 2.5rem'}}>
-        {
-            gigDataArray.map((item) => <Gig gigData={item}  key = {item.id}/>)
-        }
-      </div>}
+<div className=' w-100 mx-auto' style={{ overflowY: 'auto', height:'calc(100vh - 6rem)'}}>
+  {role === 'buyer' ? (
+    <h3 className='pl-2'>Gigs you might want to check!</h3>
+  ) : (
+    <h3 className='pl-3'>Jobs you might want to check!</h3>
+  )}
+  {role === 'buyer' && (
+    <div className='d-flex flex-wrap justify-content-center gap-2'>
+      {gigDataArray.map((item) => (
+        <Gig gigData={item} key={item.id} />
+      ))}
     </div>
+  )}
+  {role === 'seller' && (
+    <div className='d-flex flex-wrap justify-content-center gap-2'>
+      {gigDataArray.map((item) => (
+        <Gig gigData={item} key={item.id} />
+      ))}
+    </div>
+  )}
+</div>
     </>
   )
 }

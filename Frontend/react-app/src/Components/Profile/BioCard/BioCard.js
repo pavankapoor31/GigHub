@@ -56,21 +56,21 @@ export default function BioCard({info}) {
         <div className='col-9 d-flex justify-content-end'>
           <div className='col-3'>
             <div className='main-color pt-2 pb-2 pl-4 d-flex flex-column align-items-start rounded-start'>
-              <span className='text-sm font-sans'>Portfolio</span>
+              <span className='text-sm font-sans font-semibold'>Portfolio</span>
               <a className='text-xs' href='#'>{info.portfolio}</a>
             </div>
           </div>
 
           <div className='col-3'>
             <div className='main-color pt-2 pb-2 d-flex flex-column align-items-start'>
-              <span className='text-sm font-sans'>Linkedin</span>
+              <span className='text-sm font-sans font-semibold'>Linkedin</span>
               <a className='text-xs' href='#'>{info.linkedin}</a>
             </div>
           </div>
 
           <div className='col-3'>
             <div className='main-color pt-2 pb-2 d-flex flex-column align-items-start rounded-end'>
-              <span className='text-sm font-sans'>Email</span>
+              <span className='text-sm font-sans font-semibold'>Email</span>
               <a className='text-xs' href='#'>{info.email}</a>
             </div>
           </div>

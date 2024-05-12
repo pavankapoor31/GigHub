@@ -5,7 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {},
-    fontSize: {}
+    fontSize: {
+      xs: '0.75rem',
+      sm: '0.8rem'
+    }
   },
   plugins: [],
 }

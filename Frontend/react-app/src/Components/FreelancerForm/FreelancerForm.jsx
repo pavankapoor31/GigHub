@@ -5,7 +5,9 @@ import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
 import { BASE_URL } from '../../global_config';
 import { toast } from 'react-toastify';
-
+import { useSelector,useDispatch } from 'react-redux'
+import { setFreelancerId, setIsSeller } from '../../redux/actions/gighub.actions';
+import { useNavigate } from 'react-router-dom';
 const FreelancerForm = ({onClose}) => {
   const [formData, setFormData] = useState({
     location: '',
@@ -31,7 +33,8 @@ const FreelancerForm = ({onClose}) => {
     portfolio:false,
     linkedIn:false
   });
-
+const navigate = useNavigate();
+const dispatch = useDispatch();
   useEffect(
     ()=>{
       axios.get(
@@ -107,12 +110,39 @@ const FreelancerForm = ({onClose}) => {
         "linkedin":linkedin
       }
     };
+    
     let client_id = localStorage.getItem('profile.id');
     if(!client_id){
       toast.error("Error while parsing client information");
     }
     client_id = JSON.parse(client_id)
-    freelancerData["client_id"] = client_id;
+    axios.get(`${BASE_URL}/api/clients?filter={"where":{"id":"${client_id}"}}`).then(
+      (res)=>{
+        if(res.data.length>0){
+          freelancerData["client_id"] = client_id
+          freelancerData["username"] = res.data[0].username
+          freelancerData["name"] = res.data[0].name
+          freelancerData["email"] = res.data[0].email
+          axios.post(`${BASE_URL}/api/freelancers`, freelancerData).then(
+            (res)=>{
+              if(res.status===200){
+                console.log(res.data);
+                dispatch(setIsSeller(true));
+                dispatch(setFreelancerId(res.data.id))
+                localStorage.setItem('freelancerId',JSON.stringify(res.data.id));
+                navigate('/profile')
+              }
+            },[]
+          )
+          onClose()
+        }
+      }
+    ).finally(
+      ()=>{
+        onClose();
+      }
+    )
+   
     console.log(freelancerData,'freelancerData'); // You can replace this with your actual function to submit the data
   };
 

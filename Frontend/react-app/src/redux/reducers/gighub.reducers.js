@@ -1,8 +1,10 @@
-import { USERMODE,ISSELLER } from "../types/gighub.types";
+import { USERMODE,ISSELLER, SETFREELANCERID,SETROLE } from "../types/gighub.types";
 
 const INITIAL_STATE = {
   userMode:"client",
-  isSeller:true
+  isSeller:true,
+  freelancerId:'',
+  role:"buyer"
 };
 
 const gighubReducer = (state = INITIAL_STATE, action) => {
@@ -16,6 +18,16 @@ const gighubReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isSeller: action.payload,
+      };
+    case SETFREELANCERID:
+      return {
+        ...state,
+        freelancerId: action.payload,
+      };
+    case SETROLE:
+      return {
+        ...state,
+        role: action.payload,
       };
     default:
       return state;

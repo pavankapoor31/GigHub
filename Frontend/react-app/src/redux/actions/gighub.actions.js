@@ -1,5 +1,5 @@
 
-import { USERMODE,ISSELLER } from "../types/gighub.types";
+import { USERMODE,ISSELLER ,SETFREELANCERID,SETROLE} from "../types/gighub.types";
 
 export const setUserMode = (data) => (dispatch) => {
   dispatch({
@@ -8,9 +8,20 @@ export const setUserMode = (data) => (dispatch) => {
   });
 };
 export const setIsSeller = (data) => (dispatch) => {
-  console.log(data,'issellerdata')
   dispatch({
     type: ISSELLER,
+    payload: data,
+  });
+};
+export const setFreelancerId = (data) => (dispatch) => {
+  dispatch({
+    type: SETFREELANCERID,
+    payload: data,
+  });
+};
+export const setRole = (data) => (dispatch) => {
+  dispatch({
+    type: SETROLE,
     payload: data,
   });
 };
